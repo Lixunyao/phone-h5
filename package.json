@@ -1,0 +1,26 @@
+{
+  "name": "vue3-phone-h5",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.8",
+    "echart": "^0.1.3",
+    "echarts": "^5.4.2",
+    "lib-flexible": "^0.3.2",
+    "postcss-pxtorem": "^6.0.0",
+    "vant": "^4.3.1",
+    "vue": "^3.2.47"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.1.0",
+    "postcss-px-to-viewport": "^1.1.1",
+    "sass": "^1.62.1",
+    "vite": "^4.3.2"
+  }
+}
