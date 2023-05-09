@@ -4,8 +4,9 @@
 </template>
    
 <script setup>
-import { ref, onMounted, watch, watchEffect } from 'vue'
+import { ref, onMounted, watchEffect } from 'vue'
 import * as echarts from 'echarts'
+import shandongJson from './shandong.json'
 let chartDom = ref(null)
 let myChart = ref(null)
 const props = defineProps({
@@ -16,19 +17,18 @@ const props = defineProps({
     }
 })
 onMounted(() => {
+    echarts.registerMap('山东', shandongJson);
     myChart.value = echarts.init(chartDom.value)
     myChart.value.setOption(props.options, true)
 })
 watchEffect(() => {
     props.options, (newval) => {
-        console.log(newval)
         myChart.value.setOption(newval)
     }, {
         deep: true
     }
 })
 window.addEventListener("resize", function () {
-    console.log(1123)
     myChart.value.resize()
 })
     // watch(() => props.options, (newOptions) => [myChart.value.setOption(newOptions)
@@ -39,7 +39,7 @@ window.addEventListener("resize", function () {
 
 <style scoped lang="scss">
 .main {
-    width: 375px;
-    height: 340px;
+    width: 355px;
+    height: 215px;
 }
 </style>

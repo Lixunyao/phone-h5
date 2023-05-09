@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, watchEffect } from "vue";
+import { ref, reactive, onMounted, watch } from "vue";
 import * as echarts from "echarts";
 let chartPie = ref(null);
 let myChart = ref(null);
@@ -15,8 +15,6 @@ let colorList = reactive([
     "#f2719a",
 
 ]);
-let legendName = reactive([])
-let percent = ref(0);
 const props = defineProps({
     options: {
         type: Object,
@@ -41,7 +39,7 @@ onMounted(() => {
 
     drawLiquidfill(nameArr, dataArr, colorList, sum);
 });
-watchEffect(() => {
+watch(() => 
     props.options,
         (newval) => {
             let nameArr = [];
@@ -58,13 +56,7 @@ watchEffect(() => {
             });
             drawLiquidfill(nameArr, dataArr, colorList, sum);
         },
-    {
-        deep: true,
-    };
-});
-function legendNamehandler(name, data) {
-
-}
+);
 function drawLiquidfill(name, data, colorList, sum) {
     for (var i = 0; i < props.options.length; i++) {
         var sum
@@ -104,7 +96,6 @@ function drawLiquidfill(name, data, colorList, sum) {
             },
 
             formatter: function (params) {
-                console.log(`output->data,sum`, data, sum, params)
                 let str = ''
                 props.options.forEach(option => {
                     if (option.name == params) {

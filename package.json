@@ -5,15 +5,23 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:dev": "npm run build -- --mode development",
+    "build:pro": "npm run build -- --mode production"
   },
   "dependencies": {
     "autoprefixer": "^10.4.8",
+    "axios": "^1.4.0",
     "echart": "^0.1.3",
     "echarts": "^5.4.2",
+    "element-plus": "^2.3.4",
+    "js-cookie": "^3.0.1",
+    "jsencrypt": "^3.0.0-rc.1",
     "lib-flexible": "^0.3.2",
+    "pinia": "^2.0.35",
     "postcss-pxtorem": "^6.0.0",
+    "unplugin-auto-import": "^0.15.3",
+    "unplugin-vue-components": "^0.24.1",
     "vant": "^4.3.1",
     "vue": "^3.2.47"
   },
@@ -21,6 +29,7 @@
     "@vitejs/plugin-vue": "^4.1.0",
     "postcss-px-to-viewport": "^1.1.1",
     "sass": "^1.62.1",
-    "vite": "^4.3.2"
+    "vite": "^4.3.2",
+    "vite-plugin-html": "^3.2.0"
   }
 }

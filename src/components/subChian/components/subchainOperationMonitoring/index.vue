@@ -8,19 +8,19 @@
             <div class="dsc-item">
                 <img class="item-img" src="@/assets/images/1838.png" alt="">
                 <span class="state ">正常</span>
-                <span class="state-num">12</span>
+                <span class="state-num">{{ echartData.normal }}</span>
 
             </div>
             <div class="dsc-item">
-                <img src="@/assets/images/1837.png" alt="">
+                <img class="item-img" src="@/assets/images/1837.png" alt="">
                 <span class="state ">警告</span>
-                <span class="state-num warning">8</span>
+                <span class="state-num warning">{{ echartData.alarm }}</span>
 
             </div>
             <div class="dsc-item">
-                <img src="@/assets/images/1836.png" alt="">
+                <img class="item-img" src="@/assets/images/1836.png" alt="">
                 <span class="state " >故障</span>
-                <span class="state-num error">2</span>
+                <span class="state-num error">{{echartData.fault}}</span>
 
             </div>
         </div>
@@ -29,7 +29,10 @@
 </template>
 
 <script setup>
-
+import { computed } from '@vue/reactivity';
+import { echartsData } from '../../../../store/modules/echartsData';
+const echartsData1 = echartsData()
+let echartData = computed(()=>echartsData1.subchainOperationMonitoringList)
 </script>
 
 <style scoped lang='scss'>

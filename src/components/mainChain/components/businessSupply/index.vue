@@ -13,7 +13,7 @@
                     </div>
                 </div>
                 <div class="dscNum">
-                    <span class="num">12</span>
+                    <span class="num">{{ data.applyChainCount }}</span>
                     <span class="dsc">已申请</span>
                 </div>
             </div>
@@ -23,12 +23,12 @@
                 <div class="dscName">
                     <img src="@/assets/images/1566.png" class="dscNameImg" alt="">
                     <div class="nameItem">
-                        <span class="name">申请建链</span>
+                        <span class="name">部署子链</span>
                         <span class="nameDsc">单位：个</span>
                     </div>
                 </div>
                 <div class="dscNum">
-                    <span class="num">12</span>
+                    <span class="num">{{data.depolyChainCount }}</span>
                     <span class="dsc">已申请</span>
                 </div>
             </div>
@@ -38,12 +38,12 @@
                 <div class="dscName">
                     <img src="@/assets/images/1567.png" class="dscNameImg" alt="">
                     <div class="nameItem">
-                        <span class="name">申请建链</span>
+                        <span class="name">子链接入</span>
                         <span class="nameDsc">单位：个</span>
                     </div>
                 </div>
                 <div class="dscNum">
-                    <span class="num">12</span>
+                    <span class="num">{{data.accessChainCount }}</span>
                     <span class="dsc">已接入</span>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                 <div class="dscName">
                     <img src="@/assets/images/1568.png" class="dscNameImg" alt="">
                     <div class="nameItem">
-                        <span class="name">申请建链</span>
+                        <span class="name">跨链协同</span>
                         <span class="nameDsc">单位：个</span>
                     </div>
                 </div>
@@ -67,7 +67,10 @@
 </template>
 
 <script setup>
-
+import { computed } from '@vue/reactivity';
+import { echartsData } from '@/store'
+const echartsData1 = echartsData()
+const data = computed(()=>echartsData1.businessSupplyList)
 </script>
 
 <style scoped lang='scss'>

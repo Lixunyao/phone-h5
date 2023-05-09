@@ -7,44 +7,50 @@
     </div>
 
     <div class="recentTime">
-      <span
-        :class="{ recentDay: true, isActive: recentDayNumber == 30 }"
-        @click="recentDayNumber = 30"
-        >近30天</span
-      >
+      <span :class="{ recentDay: true, isActive: recentDayNumber == 30 }" @click="recentDayNumber = 30">近30天</span>
 
-      <span
-        :class="{ recentDay: true, isActive: recentDayNumber == 7 }"
-        @click="recentDayNumber = 7"
-        >近7天</span
-      >
+      <span :class="{ recentDay: true, isActive: recentDayNumber == 7 }" @click="recentDayNumber = 7">近7天</span>
 
-      <span
-        :class="{ recentDay: true, isActive: recentDayNumber == 0 }"
-        @click="recentDayNumber = 0"
-        >本日</span
-      >
+      <span :class="{ recentDay: true, isActive: recentDayNumber == 0 }" @click="recentDayNumber = 0">本日</span>
     </div>
     <div class="activeData">
-        <div class="activeItem">
-            <echartOne :options="echartData"></echartOne>
-        </div>
+      <div class="activeItem">
+        <echartOne :options="echartData"></echartOne>
+      </div>
     </div>
 
   </div>
 </template>
 
 <script setup>
+// import echartOne from './components/echart.vue'
+// import { ref , reactive } from "vue";
+// const recentDayNumber = ref(30);
+// const echartData = reactive([
+//     { name: '济南市', value: 45 },
+//     { name: '青岛市', value: 22 },
+//     { name: '淄博市', value: 5 },
+//   { name: '枣庄市', value: 4 },
+//      { name: '济宁市', value: 4 },
+// ])
+
 import echartOne from './components/echart.vue'
-import { ref , reactive } from "vue";
-const recentDayNumber = ref(30);
-const echartData = reactive([
-    { name: '济南市', value: 45 },
-    { name: '青岛市', value: 22 },
-    { name: '淄博市', value: 5 },
-  { name: '枣庄市', value: 4 },
-     { name: '济宁市', value: 4 },
-])
+import { ref , watch, computed } from "vue";
+import { echartsData } from '../../../../store/modules/echartsData';
+let recentDayNumber = ref(30);
+const echartsData1 = echartsData()
+let echartData = computed(() => echartsData1.subchainTopList.month)
+console.log( echartsData1.subchainTopList)
+watch(recentDayNumber, (newVal, oldVal) => {
+  switch (newVal) {
+    case 30: echartData = computed(() => echartsData1.subchainTopList.month)
+      break;
+    case 7: echartData = computed(() => echartsData1.subchainTopList.week)
+      break;
+    case 0: echartData = computed(() => echartsData1.subchainTopList.day)
+      break;
+  }
+})
 </script>
 
 <style scoped lang="scss">

@@ -4,7 +4,7 @@
 </template>
    
 <script setup>
-import { ref, onMounted, watchEffect } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import * as echarts from 'echarts'
 let chartDom = ref(null)
 let myChart = ref(null)
@@ -31,8 +31,9 @@ onMounted(() => {
     })
     drawLiquidfill(nameArr, dataArr, sum)
 })
-watchEffect(() => {
+watch(() =>
     props.options, (newval) => {
+        console.log(newval)
         let nameArr = []
         let dataArr = []
         let sum = 0;
@@ -46,17 +47,11 @@ watchEffect(() => {
             dataArr.push(item.value)
         })
         drawLiquidfill(nameArr, dataArr, sum)
-    }, {
-        deep: true
-    }
-})
+    })
 function drawLiquidfill(name, data, sum) {
-
-
-
     const option = {
         grid: {
-            left:60,
+            left: 90,
             top: 0,
             right: 50,
         },
@@ -100,10 +95,10 @@ function drawLiquidfill(name, data, sum) {
                     color: '#333333',
                     fontSize: '14'
                 },
-                // formatter: '{value}%'
-                formatter: function (value) {
-                    return (value / sum * 100).toFixed(0) + '%';
-                }
+                formatter: '{value}'
+                // formatter: function (value) {
+                //     return (value / sum * 100).toFixed(0) + '%';
+                // }
             },
             data: data
         }],
@@ -114,13 +109,13 @@ function drawLiquidfill(name, data, sum) {
             itemStyle: {
                 normal: {
                     barBorderRadius: 5,
-                      color: '#4D83FD'
+                    color: '#4D83FD'
                 },
             },
             barWidth: 10,
 
             data,
- 
+
         },
         {
 

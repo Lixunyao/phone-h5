@@ -6,7 +6,7 @@
                 <span class="numDsc">子链数</span>
             </div>
             <div class="num">
-                <span class="numBg">17</span>
+                <span class="numBg">{{data.all}}</span>
                 个
             </div>
         </div>
@@ -16,7 +16,7 @@
                 <span class="numDsc">以接入方式建设子链</span>
             </div>
             <div class="num">
-                <span class="numBg">15</span>
+                <span class="numBg">{{data.access}}</span>
                 个
             </div>
         </div>
@@ -24,7 +24,10 @@
 </template>
 
 <script setup>
-
+import { computed } from '@vue/reactivity';
+import { echartsData } from '../../../../store/modules/echartsData';
+const echartsData1 = echartsData()
+let data = computed(()=>echartsData1.subchainDistributionList)
 </script>
 
 <style scoped lang='scss'>

@@ -4,14 +4,15 @@
 </template>
    
 <script setup>
-import { ref, onMounted, watchEffect } from 'vue'
+import { ref, onMounted ,watch } from 'vue'
 import * as echarts from 'echarts'
 let chartDom = ref(null)
 let myChart = ref(null)
+// myChart.value = echarts.init(chartDom.value)
 const props = defineProps({
     options: {
         type: Object,
-        default: {},
+        default: [],
         required: true
     }
 })
@@ -19,47 +20,37 @@ onMounted(() => {
     myChart.value = echarts.init(chartDom.value)
     let nameArr = []
     let dataArr = []
-    let sum = 0;
     props.options.map(item => {
-        if (item.name) {
-            nameArr.push(item.name)
+        if (item.key) {
+            nameArr.push(item.key)
         } else {
             nameArr.push('无')
         }
-        sum += item.value
         dataArr.push(item.value)
     })
-    drawLiquidfill(nameArr, dataArr, sum)
+    drawLiquidfill(nameArr, dataArr)
 })
-watchEffect(() => {
-    props.options, (newval) => {
+watch(
+    () => props.options,(newval, prevVal) => {
         let nameArr = []
         let dataArr = []
-        let sum = 0;
         newval.map(item => {
-            if (item.name) {
-                nameArr.push(item.name)
+            if (item.key) {
+                nameArr.push(item.key)
             } else {
                 nameArr.push('无')
             }
-            sum += item.value
             dataArr.push(item.value)
         })
-        drawLiquidfill(nameArr, dataArr, sum)
-    }, {
-        deep: true
+        drawLiquidfill(nameArr, dataArr)
     }
-})
-function drawLiquidfill(name, data, sum) {
-    let colorStops1 = '#091836'
-    let colorStops2 = '#091836'
-    let colorStops3 = '#983C48'
-
+)
+function drawLiquidfill(name, data) {
     const option = {
         grid: {
-            left: 70,
+            left:60,
             top: 0,
-             right: 70,
+            right: 50,
         },
         xAxis: {
             show: false,
@@ -71,7 +62,7 @@ function drawLiquidfill(name, data, sum) {
             axisLabel: {
                 textStyle: {
                     color: '#666666',
-                    fontSize: 12,
+                    fontSize: 13,
 
                 },
             },
@@ -97,19 +88,14 @@ function drawLiquidfill(name, data, sum) {
             show: true,
 
             axisLabel: {
-                margin:35,
                 textStyle: {
-                     align: 'center',
                     color: '#333333',
                     fontSize: '14'
                 },
                 // formatter: '{value}%'
-                formatter: function (value) {
-                    let str = ''
-                    let percent = (value / sum * 100).toFixed(0) + '%';
-                    str = percent + '\n' + '使用率'
-                    return str
-                }
+                // formatter: function (value) {
+                //     return (value / sum * 100).toFixed(0) + '%';
+                // }
             },
             data: data
         }],
@@ -120,29 +106,13 @@ function drawLiquidfill(name, data, sum) {
             itemStyle: {
                 normal: {
                     barBorderRadius: 5,
+                      color: '#4D83FD'
                 },
             },
             barWidth: 10,
 
-            data: [{
-                value: parseFloat(data[0]),
-                itemStyle: {
-                    color: '#34d160'
-
-                }
-            },
-            {
-                value: parseFloat(data[1]),
-                itemStyle: {
-                    color: '#fdb301'
-                }
-            },
-            {
-                value: parseFloat(data[2]),
-                itemStyle: {
-                    color: '#f2719a'
-                }
-            }],
+            data,
+ 
         },
         {
 
@@ -173,6 +143,6 @@ window.addEventListener("resize", function () {
 <style scoped lang="scss">
 .main {
     width: 355px;
-    height: 174px;
+    height: 520px;
 }
 </style>

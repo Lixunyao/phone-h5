@@ -2,19 +2,20 @@
     <div class="item">
         <div class="item-title">
             <span class="title-name">接受/跨链交易趋势</span>
-
             <span class="title-dsc">（跨链交易数,单位:个）</span>
         </div>
-                <div class="recentTime">
-                <span :class="{ recentDay: true, isActive: recentDayNumber == 'month' }" @click="recentDayNumber = 'month'">月</span>
+        <div class="recentTime">
+            <span :class="{ recentDay: true, isActive: recentDayNumber == 'month' }"
+                @click="recentDayNumber = 'month'">月</span>
 
-                <span :class="{ recentDay: true, isActive: recentDayNumber == 'week' }" @click="recentDayNumber = 'week'">周</span>
+            <span :class="{ recentDay: true, isActive: recentDayNumber == 'week' }"
+                @click="recentDayNumber = 'week'">周</span>
 
-                <span :class="{ recentDay: true, isActive: recentDayNumber == 'day' }" @click="recentDayNumber = 'day'">日</span>
-            </div>
-                    <div class="linScreen">
-                <echartLin :options="echartData"></echartLin>
-            </div>
+            <span :class="{ recentDay: true, isActive: recentDayNumber == 'day' }" @click="recentDayNumber = 'day'">日</span>
+        </div>
+        <div class="linScreen">
+            <echartLin :options="echartData"></echartLin>
+        </div>
     </div>
 </template>
 
@@ -41,7 +42,7 @@ const echartData = reactive([
     },
     {
         name: "4",
-        value1: 80 ,
+        value1: 80,
         value2: 100
     },
     {
@@ -54,9 +55,6 @@ const echartData = reactive([
         value1: 75,
         value2: 210
     },
-
-
-
 ]);
 </script>
 
@@ -71,6 +69,7 @@ const echartData = reactive([
     top: -51px;
     margin-top: 12px;
 }
+
 .recentTime {
     display: flex;
     justify-content: center;
@@ -95,5 +94,4 @@ const echartData = reactive([
         background: #2b69ff;
         color: #ffffff;
     }
-}
-</style>
+}</style>

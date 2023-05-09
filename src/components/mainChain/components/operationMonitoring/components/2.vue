@@ -54,7 +54,6 @@ function drawLiquidfill(name, data, sum) {
     let colorStops1 = '#091836'
     let colorStops2 = '#091836'
     let colorStops3 = '#983C48'
-    console.log(`output->`, name, data)
     const option = {
         grid: {
             left: 70,

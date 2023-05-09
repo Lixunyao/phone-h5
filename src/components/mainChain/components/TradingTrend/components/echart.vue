@@ -111,7 +111,6 @@ function drawLiquidfill(xAxisData, yAxisData1, yAxisData2, color, hexToRgba) {
         //     },
 
         //     formatter: function (params) {
-        //         console.log(`output->data,sum`, data, sum, params)
         //         let str = ''
         //         props.options.forEach(option => {
         //             if (option.name == params) {
@@ -125,7 +124,7 @@ function drawLiquidfill(xAxisData, yAxisData1, yAxisData2, color, hexToRgba) {
         // },
          legend: {
             right: 20,
- 
+            selectedMode: false
         },
 
         //     tooltip: {
@@ -143,7 +142,7 @@ function drawLiquidfill(xAxisData, yAxisData1, yAxisData2, color, hexToRgba) {
             type: "category",
             boundaryGap: false,
             axisLabel: {
-                formatter: '{value}月',
+                formatter: '{value}',
                 textStyle: {
                     color: "#333"
                 }

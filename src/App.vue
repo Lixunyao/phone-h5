@@ -1,32 +1,3 @@
-<!-- <script setup>
-import { reactive } from 'vue';
-import HelloWorld from './components/HelloWorld.vue'
-import test1 from './components/test1.vue';
-const options = reactive({
-  xAxis:{
-    type:'category',
-    data:['A','B','C']
-  },
-  yAxis:{
-    type:'value'
-  },
-  series:[
-    {
-      data:[120,200,150],
-      type:'line'
-    }
-  ]
-})
-</script>
-
-<template>
-  <HelloWorld msg="Vite + Vue" />
-  <test1 :options="options"></test1>
-</template>
-
-<style lang="scss" scoped>
-
-</style> -->
 <template>
   <div class="hearder">
     <h2 class="title">齐鲁链数据运行监控</h2>
@@ -47,7 +18,7 @@ const options = reactive({
   </div>
   <DataOverview v-if="activeItem == 0"></DataOverview>
   <MainChain v-if="activeItem == 1"></MainChain>
-  <Subchain v-if="activeItem==2"></Subchain>
+  <Subchain v-if="activeItem == 2"></Subchain>
   <div>
 
   </div>
@@ -58,6 +29,33 @@ import DataOverview from './components/DataOverview/index.vue';
 import MainChain from './components/mainChain/index.vue';
 import Subchain from './components/subChian/index.vue'
 import { ref } from 'vue';
+//获取token
+import { encrypt } from "@/utils/jsencrypt";
+import { setToken } from '@/utils/auth';
+import { passwordLogin } from '@/api/login/index.js';
+import { echartsData } from '@/store'
+let echartsData1 = echartsData()
+let username = encrypt('admin')
+let password = encrypt('HEYAO1997heyao?')
+passwordLogin(username, password).then(res => {
+  setToken(res.token)
+  let arr = [
+    'updateCoreData',
+    'updateChainCount',
+    'updateSubchainList',
+    'updateBusinessSupplyList',
+    'updateServiceProviderSupplyList',
+    'updateTradingTrend',
+    'updateOperationMonitoring',
+    'updateSubchainDistributionList',
+    'updateSubchainTopList',
+    'updateSubchainOperationMonitoringList',
+  ]
+  arr.map((item) => {
+    echartsData1[item]()
+  })
+})
+
 let activeItem = ref(0)
 </script>
 
