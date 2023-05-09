@@ -98,7 +98,7 @@ export const echartsData = defineStore('echartsData', {
     },
     updateOperationMonitoring() {
       operationMonitoring().then(res => {
-        this.operationMonitoring = res.data
+        this.operationMonitoringList = res.data
       })
     },
     updateSubchainDistributionList() {

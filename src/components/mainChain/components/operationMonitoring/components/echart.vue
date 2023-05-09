@@ -4,23 +4,64 @@
 </template>
    
 <script setup>
-import { ref, onMounted, watchEffect } from 'vue'
+import { ref, toRefs, reactive, onMounted, watchEffect , watch } from 'vue'
 import * as echarts from 'echarts'
+import { echartsData } from '@/store'
 let chartDom = ref(null)
 let myChart = ref(null)
+let chartData = reactive([
+    { name: 'cpu负载', value: 0 },
+    { name: '内存负载', value: 0 },
+    { name: '磁盘负载', value: 0 },
+])
+
+let test = toRefs(props)
+
 const props = defineProps({
-    options: {
-        type: Object,
-        default: {},
+
+    rencentSelect: {
+        type: Number,
+        default: 1,
         required: true
     }
 })
 onMounted(() => {
     myChart.value = echarts.init(chartDom.value)
+      handleChartData(props.rencentSelect)
+})                                                                  
+
+watchEffect(() => {
+
+});
+watch(
+    () => props.rencentSelect,
+    (count, prevCount) => {
+         handleChartData(prevCount)
+    }
+);
+
+function handleChartData(rencentSelectData) {
+    // console.log(`output->`, echartsData().operationMonitoringList)
+    if (rencentSelectData == 1) {
+        chartData[0].value = echartsData().operationMonitoringList.p1.cpu
+        chartData[1].value = echartsData().operationMonitoringList.p1.disk
+        chartData[2].value = echartsData().operationMonitoringList.p1.mem
+    } else if (rencentSelectData == 2) {
+        chartData[0].value = echartsData().operationMonitoringList.p2.cpu
+        chartData[1].value = echartsData().operationMonitoringList.p2.disk
+        chartData[2].value = echartsData().operationMonitoringList.p2.mem
+    } else if (rencentSelectData == 3) {
+        chartData[0].value = echartsData().operationMonitoringList.p3?.cpu || 0
+        chartData[1].value = echartsData().operationMonitoringList.p3?.disk||0
+        chartData[2].value = echartsData().operationMonitoringList.p3?.mem||0
+    
+    }
+
     let nameArr = []
     let dataArr = []
     let sum = 0;
-    props.options.map(item => {
+
+    chartData.map(item => {
         if (item.name) {
             nameArr.push(item.name)
         } else {
@@ -30,36 +71,16 @@ onMounted(() => {
         dataArr.push(item.value)
     })
     drawLiquidfill(nameArr, dataArr, sum)
-})
-watchEffect(() => {
-    props.options, (newval) => {
-        let nameArr = []
-        let dataArr = []
-        let sum = 0;
-        newval.map(item => {
-            if (item.name) {
-                nameArr.push(item.name)
-            } else {
-                nameArr.push('无')
-            }
-            sum += item.value
-            dataArr.push(item.value)
-        })
-        drawLiquidfill(nameArr, dataArr, sum)
-    }, {
-        deep: true
-    }
-})
+}
+
 function drawLiquidfill(name, data, sum) {
-    let colorStops1 = '#091836'
-    let colorStops2 = '#091836'
-    let colorStops3 = '#983C48'
+
 
     const option = {
         grid: {
             left: 70,
             top: 0,
-             right: 70,
+            right: 70,
         },
         xAxis: {
             show: false,
@@ -97,18 +118,15 @@ function drawLiquidfill(name, data, sum) {
             show: true,
 
             axisLabel: {
-                margin:35,
+                margin: 35,
                 textStyle: {
-                     align: 'center',
+                    align: 'center',
                     color: '#333333',
                     fontSize: '14'
                 },
                 // formatter: '{value}%'
                 formatter: function (value) {
-                    let str = ''
-                    let percent = (value / sum * 100).toFixed(0) + '%';
-                    str = percent + '\n' + '使用率'
-                    return str
+                    return Number(value).toFixed(0) + '%' + '\n' + '使用率';
                 }
             },
             data: data

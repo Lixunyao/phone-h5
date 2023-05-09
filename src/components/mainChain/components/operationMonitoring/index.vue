@@ -13,7 +13,7 @@
             <span :class="{ recentDay: true, isActive: recentDayNumber == 3 }" @click="recentDayNumber = 3">3号节点</span>
         </div>
         <div class="echartPercentLin">
-            <echartOne :options="echartData"></echartOne>
+            <echartOne :rencentSelect="recentDayNumber"></echartOne>
         </div>
     </div>
 </template>
@@ -23,11 +23,7 @@
 import echartOne from './components/echart.vue'
 import { ref, reactive } from "vue";
 const recentDayNumber = ref(1);
-const echartData = reactive([
-    { name: 'cpu负载', value: 35 },
-    { name: '内存负载', value: 22 },
-    { name: '磁盘负载', value: 74 },
-])
+
 </script>
 
 <style scoped lang='scss'>
