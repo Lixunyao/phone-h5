@@ -48,13 +48,13 @@ watch(
 function drawLiquidfill(name, data) {
     const option = {
         grid: {
-            left:60,
+            left: 60,
             top: 0,
             right: 50,
         },
         xAxis: {
             show: false,
-            type: 'value'
+            type: 'value',
         },
         yAxis: [{
             type: 'category',
@@ -66,6 +66,8 @@ function drawLiquidfill(name, data) {
 
                 },
             },
+            axisTick: { interval: 1 },
+
             splitLine: {
                 show: false
             },
@@ -103,6 +105,8 @@ function drawLiquidfill(name, data) {
             name: '值',
             type: 'bar',
             zlevel: 1,
+            barGap: "10%",
+            barCategoryGap:"10%",
             itemStyle: {
                 normal: {
                     barBorderRadius: 5,

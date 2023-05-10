@@ -36,22 +36,22 @@ watchEffect(() => {
 watch(
     () => props.rencentSelect,
     (count, prevCount) => {
-         handleChartData(prevCount)
+         handleChartData(count)
     }
 );
 
 function handleChartData(rencentSelectData) {
     // console.log(`output->`, echartsData().operationMonitoringList)
     if (rencentSelectData == 1) {
-        chartData[0].value = echartsData().operationMonitoringList.p1.cpu
-        chartData[1].value = echartsData().operationMonitoringList.p1.disk
-        chartData[2].value = echartsData().operationMonitoringList.p1.mem
+        chartData[0].value = echartsData().operationMonitoringList.p1.cpu||0
+        chartData[1].value = echartsData().operationMonitoringList.p1.disk||0
+        chartData[2].value = echartsData().operationMonitoringList.p1.mem||0
     } else if (rencentSelectData == 2) {
-        chartData[0].value = echartsData().operationMonitoringList.p2.cpu
-        chartData[1].value = echartsData().operationMonitoringList.p2.disk
-        chartData[2].value = echartsData().operationMonitoringList.p2.mem
+        chartData[0].value = echartsData().operationMonitoringList.p2.cpu||0
+        chartData[1].value = echartsData().operationMonitoringList.p2.disk||0
+        chartData[2].value = echartsData().operationMonitoringList.p2.mem||0
     } else if (rencentSelectData == 3) {
-        chartData[0].value = echartsData().operationMonitoringList.p3?.cpu || 0
+        chartData[0].value = echartsData().operationMonitoringList.p3?.cpu ||0
         chartData[1].value = echartsData().operationMonitoringList.p3?.disk||0
         chartData[2].value = echartsData().operationMonitoringList.p3?.mem||0
     
@@ -175,6 +175,9 @@ function drawLiquidfill(name, data, sum) {
                     color: '#EFF0F1',
                     barBorderRadius: 5,
                 }
+            },
+            emphasis: {
+                disabled: true,
             },
 
             legendHoverLink: false,

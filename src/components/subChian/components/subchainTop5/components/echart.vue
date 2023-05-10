@@ -131,7 +131,9 @@ function drawLiquidfill(name, data, sum) {
                     barBorderRadius: 5,
                 }
             },
-
+            emphasis: {
+                disabled: true,
+            },
             legendHoverLink: false,
         },
         ]

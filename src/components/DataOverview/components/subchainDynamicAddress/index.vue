@@ -44,13 +44,18 @@ const options = ref({
                 color: 'rgba(0, 0, 0, 0.7)',
             },
             itemStyle: {
-                areaColor: '#eee',
                 borderColor: '#444',
             },
+            selectedMode:false,
+            // sellect: {
+            //       disabled: true,
+            // },
             emphasis: {
                 label: {
                     show: false,
                 },
+                disabled: true,
+
             },
             data: [
                 { name: '济南市', value: 45 },

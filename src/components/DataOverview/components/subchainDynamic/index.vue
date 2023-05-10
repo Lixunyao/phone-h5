@@ -10,9 +10,9 @@
                 <el-table :data="tableData" style="width: 100%" :border="true" :row-class-name="tableRowClassName">
                     <el-table-column prop="name" label="子链名称" width="119" show-overflow-tooltip />
                     <el-table-column prop="type" label="应用领域" width="66" show-overflow-tooltip />
-                    <el-table-column prop="accountNum" label="上链数据量(条）" width="95" show-overflow-tooltip>
+                    <el-table-column prop="txNum" label="上链数据量(条）" width="95" show-overflow-tooltip>
                         <template v-slot="scope">
-                            {{ numberTo3(scope.row.accountNum) }}
+                            {{ numberTo3(scope.row.txNum) }}
                         </template>
                     </el-table-column>
                     <el-table-column prop="runStatus" label="状态" show-overflow-tooltip>

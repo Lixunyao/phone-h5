@@ -68,14 +68,7 @@ export const echartsData = defineStore('echartsData', {
     },
     updateSubchainList() {
       subchainDynamic().then(res => {
-        let data = res.data
-        let chainIndex = data.findIndex(item => {
-          return item.flag == '1'
-        })
-        if (chainIndex != -1) {
-          data.splice(chainIndex, 1)
-        }
-        this.subchainList = data
+          this.subchainList = res.data
       })
     },
     updateBusinessSupplyList() {

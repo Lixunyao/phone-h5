@@ -88,7 +88,6 @@ let coreData = computed(()=>echartsData1.coreData)
 
             h5 {
                 margin: 21px 0 0 83px;
-                width: 42px;
                 height: 20px;
                 font-size: 14px;
                 font-family: PingFang SC-常规体, PingFang SC;
@@ -103,7 +102,6 @@ let coreData = computed(()=>echartsData1.coreData)
 
             h5 {
                 margin: 21px 0 0 60px;
-                width: 70px;
                 height: 20px;
                 font-size: 14px;
                 font-family: PingFang SC-常规体, PingFang SC;

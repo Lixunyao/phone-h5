@@ -38,7 +38,7 @@ export function largeScreenNumber() {
 //子链运行状态
 export function subchainDynamic() {
     return request({
-        url: 'largeScreen/subchainList',
+        url: 'largeScreen/subchainStatus',
         method: 'get',
     })
 }
